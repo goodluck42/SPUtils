@@ -4,11 +4,6 @@ namespace SPUtils.ProjectEngineAssociationNormalizer.Handlers;
 
 internal sealed class USavePeanFileHandler : UHandler
 {
-	public USavePeanFileHandler()
-	{
-		Order = 6;
-	}
-
 	public override void Handle(UHandlerObject uObject)
 	{
 		if (uObject.IsAutodetect)
@@ -17,9 +12,9 @@ internal sealed class USavePeanFileHandler : UHandler
 			{
 				Message = $"{nameof(USavePeanFileHandler)} skipped. {nameof(uObject.IsAutodetect)} is set to true."
 			});
-		
-			Next?.Handle(uObject);
-		
+
+			FireOnSuccess();
+			
 			return;
 		}
 
@@ -39,7 +34,7 @@ internal sealed class USavePeanFileHandler : UHandler
 			{
 				Message = "Skipped saving pean file. There is existing project info."
 			});
-
+			
 			FireOnSuccess();
 			
 			return;

@@ -12,11 +12,6 @@ internal sealed class UAutodetectEngineClassIdHandler : UHandler
 		public int SelectedEngine { get; set; }
 	}
 
-	public UAutodetectEngineClassIdHandler()
-	{
-		Order = 7;
-	}
-
 	public event Action<MultipleUnrealEngineInstancesTransferObject>? OnMultipleUnrealEngineInstancesDetected;
 
 	public override void Handle(UHandlerObject uObject)
@@ -81,7 +76,7 @@ internal sealed class UAutodetectEngineClassIdHandler : UHandler
 				}
 
 				UpdateFiles(classIds[0].Item1);
-				
+
 				uObject.ForceSavePeanFile = true; // force update after autodetection
 
 				Next?.Handle(uObject);
@@ -121,7 +116,7 @@ internal sealed class UAutodetectEngineClassIdHandler : UHandler
 						else
 						{
 							UpdateFiles(classIds[transferObject.SelectedEngine].Item1);
-							
+
 							uObject.ForceSavePeanFile = true; // force update after autodetection
 
 							Next?.Handle(uObject);

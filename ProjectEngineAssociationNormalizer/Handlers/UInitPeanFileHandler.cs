@@ -7,11 +7,6 @@ namespace SPUtils.ProjectEngineAssociationNormalizer.Handlers;
 /// </summary>
 internal sealed class UInitConfigFileHandler : UHandler
 {
-	public UInitConfigFileHandler()
-	{
-		Order = 1;
-	}
-
 	public override void Handle(UHandlerObject uObject)
 	{
 		try

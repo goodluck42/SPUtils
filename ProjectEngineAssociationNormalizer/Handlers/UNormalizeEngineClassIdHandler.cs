@@ -5,12 +5,6 @@ namespace SPUtils.ProjectEngineAssociationNormalizer.Handlers;
 
 internal sealed class UNormalizeEngineClassIdHandler : UHandler
 {
-	public UNormalizeEngineClassIdHandler()
-	{
-		Order = 5;
-	}
-
-	[SupportedOSPlatform("windows")]
 	public override void Handle(UHandlerObject uObject)
 	{
 		if (uObject.IsAutodetect)

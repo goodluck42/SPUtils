@@ -20,9 +20,7 @@ internal abstract class UHandler : ILoggable
 			}
 		}
 	}
-
-	public int Order { get; protected set; }
-
+	
 	public abstract void Handle(UHandlerObject uObject);
 
 	public event Action<Exception>? OnException;

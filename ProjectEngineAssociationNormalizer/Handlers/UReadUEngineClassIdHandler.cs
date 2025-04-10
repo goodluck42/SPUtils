@@ -4,11 +4,6 @@ namespace SPUtils.ProjectEngineAssociationNormalizer.Handlers;
 
 internal sealed class UReadUEngineClassIdHandler : UHandler
 {
-	public UReadUEngineClassIdHandler()
-	{
-		Order = 3;
-	}
-
 	public override void Handle(UHandlerObject uObject)
 	{
 		try

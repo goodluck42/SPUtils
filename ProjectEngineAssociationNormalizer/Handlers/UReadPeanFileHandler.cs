@@ -8,11 +8,6 @@ namespace SPUtils.ProjectEngineAssociationNormalizer.Handlers;
 /// </summary>
 internal sealed class UReadPeanFileHandler : UHandler
 {
-	public UReadPeanFileHandler()
-	{
-		Order = 2;
-	}
-
 	public override void Handle(UHandlerObject uObject)
 	{
 		try

@@ -2,11 +2,6 @@ namespace SPUtils.ProjectEngineAssociationNormalizer.Handlers;
 
 internal sealed class UBackupProjectFileHandler : UHandler
 {
-	public UBackupProjectFileHandler()
-	{
-		Order = 4;
-	}
-
 	public override void Handle(UHandlerObject uObject)
 	{
 		if (uObject is { IsAutodetect: true })
