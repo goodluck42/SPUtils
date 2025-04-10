@@ -197,6 +197,7 @@ internal sealed class UAutodetectEngineClassIdHandler : UHandler
 			jsonWriter.Flush();
 
 			uObject.UProjectFileStream.Position = 0;
+			uObject.UProjectFileStream.SetLength(0);
 
 			memoryStream.WriteTo(uObject.UProjectFileStream);
 

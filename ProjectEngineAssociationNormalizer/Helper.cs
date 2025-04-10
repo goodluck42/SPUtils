@@ -86,13 +86,15 @@ internal static partial class Helper
 	public static JsonSerializerOptions JsonSerializerOptions { get; } = new JsonSerializerOptions
 	{
 		WriteIndented = true,
-		IndentSize = 2
+		IndentSize = 1,
+		IndentCharacter = '\t'
 	};
 
 	public static JsonWriterOptions JsonWriterOptions { get; } = new JsonWriterOptions
 	{
 		Indented = true,
-		IndentSize = 2
+		IndentSize = 1,
+		IndentCharacter = '\t'
 	};
 
 	public static void ChangeEngineAssociation(UHandlerObject uObject, string engineClassId)

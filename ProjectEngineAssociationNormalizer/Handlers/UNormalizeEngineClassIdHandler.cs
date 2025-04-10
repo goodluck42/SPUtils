@@ -102,6 +102,8 @@ internal sealed class UNormalizeEngineClassIdHandler : UHandler
 
 			uObject.UProjectFileStream.Position = 0;
 
+			uObject.UProjectFileStream.SetLength(0);
+
 			memoryStream.WriteTo(uObject.UProjectFileStream);
 			uObject.UProjectFileStream.Flush();
 			uObject.UProjectFileStream.Dispose();
