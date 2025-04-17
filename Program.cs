@@ -1,6 +1,7 @@
 ﻿using SPUtils;
 using SPUtils.ProjectEngineAssociationNormalizer;
 using SPUtils.ProjectEngineAssociationNormalizer.Handlers;
+using SPUtils.RunBatGenerator;
 
 UtilsDetection.SetArgs(args);
 
@@ -75,16 +76,14 @@ if (UtilsDetection.IsProjectEngineAssociationNormalizer(out var engineClassId, o
 
 	globalResetEvent.WaitOne();
 }
+else if (UtilsDetection.IsRunBatGenerator(out var force))
+{
+	GenerateRunBats.OnException += ex => Console.WriteLine(ex.Message);
+	GenerateRunBats.OnOk += () => Console.WriteLine("Completed");
 
+	GenerateRunBats.Generate(force);
+}
 else
 {
-	var res = Helper.GetUnrealEngineClassIds();
-
-	foreach (var r in res)
-	{
-		Console.WriteLine(r.Item1);
-		Console.WriteLine(r.Item2);
-	}
-
-	//Console.WriteLine("No such command.");
+	Console.WriteLine("Invalid command.");
 }

@@ -26,11 +26,12 @@ internal static partial class Helper
 	{
 		try
 		{
-			using var registryKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Cryptography");
+			using var registryKey = Registry.LocalMachine.OpenSubKey(Constants.UserIdRegistryPath);
 
 			string? machineGuid;
 
-			if (registryKey is null || (machineGuid = registryKey.GetValue("MachineGuid")?.ToString()) is null)
+			if (registryKey is null ||
+			    (machineGuid = registryKey.GetValue(Constants.UserIdRegistryKey)?.ToString()) is null)
 			{
 				machineGuid = Guid.NewGuid().ToString();
 			}
@@ -47,7 +48,7 @@ internal static partial class Helper
 	{
 		try
 		{
-			var builds = Registry.CurrentUser.OpenSubKey(@"Software\Epic Games\Unreal Engine\Builds");
+			var builds = Registry.CurrentUser.OpenSubKey(Constants.UEnginesRegistryPath);
 
 			if (builds is not null)
 			{
