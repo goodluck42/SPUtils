@@ -11,6 +11,7 @@ internal static class GenerateRunBats
 			var mainDir = Path.Combine(Directory.GetCurrentDirectory(), Constants.BatRelativePath);
 			var serverRunBatPath = Path.Combine(mainDir, Constants.RunServerBatFileName);
 			var clientRunBatPath = Path.Combine(mainDir, Constants.RunClientBatFileName);
+			var clientRunNoConsoleBatPath = Path.Combine(mainDir, Constants.RunClientNoConsoleBatFileName);
 
 			if (!Directory.Exists(mainDir))
 			{
@@ -23,12 +24,16 @@ internal static class GenerateRunBats
 					new StreamWriter(File.Open(serverRunBatPath, FileMode.OpenOrCreate, FileAccess.Write));
 				using var clientStreamWriter =
 					new StreamWriter(File.Open(clientRunBatPath, FileMode.OpenOrCreate, FileAccess.Write));
+				using var clientNoConsoleStreamWriter =
+					new StreamWriter(File.Open(clientRunNoConsoleBatPath, FileMode.OpenOrCreate, FileAccess.Write));
 
 				serverStreamWriter.BaseStream.SetLength(0);
 				clientStreamWriter.BaseStream.SetLength(0);
+				clientNoConsoleStreamWriter.BaseStream.SetLength(0);
 
 				serverStreamWriter.Write(Constants.RunServerBatCommand);
 				clientStreamWriter.Write(Constants.RunClientBatCommand);
+				clientNoConsoleStreamWriter.Write(Constants.RunClientNoConsoleBatCommand);
 			}
 			else
 			{
@@ -44,6 +49,13 @@ internal static class GenerateRunBats
 					using var streamWriter = new StreamWriter(File.Create(clientRunBatPath));
 
 					streamWriter.Write(Constants.RunClientBatCommand);
+				}
+
+				if (!File.Exists(clientRunNoConsoleBatPath))
+				{
+					using var streamWriter = new StreamWriter(File.Create(clientRunNoConsoleBatPath));
+
+					streamWriter.Write(Constants.RunClientNoConsoleBatCommand);
 				}
 			}
 
