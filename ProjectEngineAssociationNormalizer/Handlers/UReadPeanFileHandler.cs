@@ -42,7 +42,7 @@ internal sealed class UReadPeanFileHandler : UHandler
 					uObject.PeanFileStream.Position = 0;
 					uObject.PeanFileStream.SetLength(0);
 
-					var jsonWriter = new Utf8JsonWriter(uObject.PeanFileStream, Helper.JsonWriterOptions);
+					var jsonWriter = new Utf8JsonWriter(uObject.PeanFileStream, Helpers.JsonWriterOptions);
 
 					jsonWriter.WriteStartArray();
 					jsonWriter.WriteEndArray();
@@ -58,7 +58,7 @@ internal sealed class UReadPeanFileHandler : UHandler
 					return;
 				}
 
-				var localUserId = Helper.GetUserId();
+				var localUserId = Helpers.GetUserId();
 
 				foreach (var boundProjectInfo in uObject.AllBoundProjectInfo)
 				{

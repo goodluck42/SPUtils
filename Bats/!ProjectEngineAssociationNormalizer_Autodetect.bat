@@ -1,0 +1,3 @@
+@echo off
+Utils\SPUtils.exe ProjectEngineAssociationNormalizer Autodetect
+pause

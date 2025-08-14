@@ -1,4 +1,4 @@
-namespace SPUtils.RunBatGenerator;
+namespace SPUtils.BatGenerator;
 
 internal static class Constants
 {

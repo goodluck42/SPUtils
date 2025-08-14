@@ -33,7 +33,7 @@ internal sealed class UNormalizeEngineClassIdHandler : UHandler
 		}
 
 
-		if (!Helper.IsClassId(engineClassId))
+		if (!Helpers.IsClassId(engineClassId))
 		{
 			if (engineClassId is null)
 			{
@@ -81,7 +81,7 @@ internal sealed class UNormalizeEngineClassIdHandler : UHandler
 			var uProjectStreamReader = new StreamReader(uObject.UProjectFileStream);
 			var document = JsonDocument.Parse(uProjectStreamReader.ReadToEnd());
 			var memoryStream = new MemoryStream();
-			var jsonWriter = new Utf8JsonWriter(memoryStream, Helper.JsonWriterOptions);
+			var jsonWriter = new Utf8JsonWriter(memoryStream, Helpers.JsonWriterOptions);
 
 			jsonWriter.WriteStartObject();
 
@@ -113,7 +113,7 @@ internal sealed class UNormalizeEngineClassIdHandler : UHandler
 				uObject.AllBoundProjectInfo.Add(new BoundProjectInfo
 				{
 					EngineId = engineClassId,
-					UserId = Helper.GetUserId()
+					UserId = Helpers.GetUserId()
 				});
 			}
 			else

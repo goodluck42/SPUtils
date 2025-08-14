@@ -21,7 +21,7 @@ internal sealed class UReadUEngineClassIdHandler : UHandler
 				{
 					var engineClassId = property.Value.GetString();
 		
-					if (Helper.IsClassId(engineClassId))
+					if (Helpers.IsClassId(engineClassId))
 					{
 						uObject.CurrentUEngineClassId = engineClassId;
 					}

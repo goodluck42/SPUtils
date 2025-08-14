@@ -40,7 +40,7 @@ internal sealed class UAutodetectEngineClassIdHandler : UHandler
 				});
 			}
 
-			if (!Helper.IsClassId(uObject.CurrentUEngineClassId))
+			if (!Helpers.IsClassId(uObject.CurrentUEngineClassId))
 			{
 				Log(new Log
 				{
@@ -49,7 +49,7 @@ internal sealed class UAutodetectEngineClassIdHandler : UHandler
 				});
 			}
 
-			var classIds = Helper.GetUnrealEngineClassIds().ToImmutableArray();
+			var classIds = Helpers.GetUnrealEngineClassIds().ToImmutableArray();
 
 			if (classIds.Length == 0)
 			{
@@ -150,7 +150,7 @@ internal sealed class UAutodetectEngineClassIdHandler : UHandler
 				uObject.AllBoundProjectInfo.Add(new BoundProjectInfo
 				{
 					EngineId = newEngineClassId,
-					UserId = Helper.GetUserId()
+					UserId = Helpers.GetUserId()
 				});
 			}
 			else
@@ -163,7 +163,7 @@ internal sealed class UAutodetectEngineClassIdHandler : UHandler
 
 			var streamWriter = new StreamWriter(uObject.PeanFileStream);
 
-			streamWriter.Write(JsonSerializer.Serialize(uObject.AllBoundProjectInfo, Helper.JsonSerializerOptions));
+			streamWriter.Write(JsonSerializer.Serialize(uObject.AllBoundProjectInfo, Helpers.JsonSerializerOptions));
 			streamWriter.Flush();
 
 			if (uObject.UProjectFileStream is null)
@@ -177,7 +177,7 @@ internal sealed class UAutodetectEngineClassIdHandler : UHandler
 			var uProjectStreamReader = new StreamReader(uObject.UProjectFileStream);
 			var document = JsonDocument.Parse(uProjectStreamReader.ReadToEnd());
 			var memoryStream = new MemoryStream();
-			var jsonWriter = new Utf8JsonWriter(memoryStream, Helper.JsonWriterOptions);
+			var jsonWriter = new Utf8JsonWriter(memoryStream, Helpers.JsonWriterOptions);
 
 			jsonWriter.WriteStartObject();
 

@@ -1,7 +1,8 @@
 ﻿using SPUtils;
 using SPUtils.ProjectEngineAssociationNormalizer;
 using SPUtils.ProjectEngineAssociationNormalizer.Handlers;
-using SPUtils.RunBatGenerator;
+using SPUtils.BatGenerator;
+using SPUtils.BatGenerator.Generators;
 
 UtilsDetection.SetArgs(args);
 
@@ -76,12 +77,36 @@ if (UtilsDetection.IsProjectEngineAssociationNormalizer(out var engineClassId, o
 
 	globalResetEvent.WaitOne();
 }
-else if (UtilsDetection.IsRunBatGenerator(out var force))
+else if (UtilsDetection.IsBatGenerator())
 {
-	GenerateRunBats.OnException += ex => Console.WriteLine(ex.Message);
-	GenerateRunBats.OnOk += () => Console.WriteLine("Completed");
+	var batGeneratorRunner = new BatGeneratorRunner();
 
-	GenerateRunBats.Generate(force);
+	batGeneratorRunner.OnException += exception =>
+	{
+		Console.WriteLine(exception);
+	};
+
+	batGeneratorRunner.OnOk += (classGenerated) =>
+	{
+		Console.WriteLine($"Generated: {classGenerated.Name}");
+	};
+
+	batGeneratorRunner.AddBatGenerator(new RunBuildServerAndClientBatGenerator());
+	batGeneratorRunner.AddBatGenerator(new RunClientBatGenerator());
+	batGeneratorRunner.AddBatGenerator(new RunServerBatGenerator());
+	batGeneratorRunner.AddBatGenerator(new RunClientNoConsoleBatGenerator());
+	batGeneratorRunner.AddBatGenerator(new RunEditorBatGenerator());
+
+	batGeneratorRunner.Run();
+}
+else if (UtilsDetection.IsSpUtilJsonEditor(out var method, out var value))
+{
+	switch (method)
+	{
+		case nameof(SpUtilJsonEditor.SetEngineDirectory):
+			SpUtilJsonEditor.SetEngineDirectory(value);
+			break;
+	}
 }
 else
 {

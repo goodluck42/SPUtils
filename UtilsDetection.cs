@@ -1,3 +1,7 @@
+using System.Diagnostics.CodeAnalysis;
+using SPUtils.BatGenerator;
+using SPUtils.BatGenerator.Generators;
+
 namespace SPUtils;
 
 internal static class UtilsDetection
@@ -16,13 +20,12 @@ internal static class UtilsDetection
 			return false;
 		}
 
-
 		switch (_args.Length)
 		{
-			case 1 when _args[0].ToLower() == "-pean":
+			case 1 when _args[0] == nameof(ProjectEngineAssociationNormalizer):
 				return true;
-			case 2 when _args[0].ToLower() == "-pean":
-				if (_args[1].ToLower() == "-autodetect")
+			case 2 when _args[0] == nameof(ProjectEngineAssociationNormalizer):
+				if (_args[1] == "Autodetect")
 				{
 					autodetect = true;
 				}
@@ -37,24 +40,29 @@ internal static class UtilsDetection
 		}
 	}
 
-	public static bool IsRunBatGenerator(out bool force)
+	public static bool IsBatGenerator()
 	{
-		force = false;
-
-		if (_args is null)
+		if (_args is [nameof(BatGeneratorRunner), ..])
 		{
-			return false;
+			return true;
 		}
 
-		switch (_args.Length)
+		return false;
+	}
+
+	public static bool IsSpUtilJsonEditor([NotNullWhen(true)] out string? method, [NotNullWhen(true)] out string? value)
+	{
+		method = null;
+		value = null;
+
+		if (_args is [nameof(SpUtilJsonEditor), _, _, ..])
 		{
-			case 1 when _args[0].ToLower() == "-grb":
-				return true;
-			case 2 when _args[0].ToLower() == "-grb" && _args[1].ToLower() == "-force":
-				force = true;
-				return true;
-			default:
-				return false;
+			method = _args[1];
+			value = _args[2];
+
+			return true;
 		}
+
+		return false;
 	}
 }

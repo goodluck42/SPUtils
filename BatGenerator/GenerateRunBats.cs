@@ -1,6 +1,4 @@
-using System.Diagnostics.CodeAnalysis;
-
-namespace SPUtils.RunBatGenerator;
+namespace SPUtils.BatGenerator;
 
 internal static class GenerateRunBats
 {

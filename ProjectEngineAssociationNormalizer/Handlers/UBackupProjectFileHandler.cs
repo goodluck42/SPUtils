@@ -61,7 +61,7 @@ internal sealed class UBackupProjectFileHandler : UHandler
 
 			var uProjectStreamReader = new StreamReader(uObject.UProjectFileStream);
 			var uProjectJson = uProjectStreamReader.ReadToEnd();
-			using var backupFileStream = File.Create(Helper.GetBackupFileName());
+			using var backupFileStream = File.Create(Helpers.GetBackupFileName());
 			using var backupStreamWriter = new StreamWriter(backupFileStream);
 
 			backupStreamWriter.Write(uProjectJson);

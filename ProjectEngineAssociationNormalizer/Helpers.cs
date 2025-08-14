@@ -4,7 +4,7 @@ using Microsoft.Win32;
 
 namespace SPUtils.ProjectEngineAssociationNormalizer;
 
-internal static partial class Helper
+internal static partial class Helpers
 {
 	[GeneratedRegex(@"^{[A-F0-9]{8}\-[A-F0-9]{4}\-[A-F0-9]{4}\-[A-F0-9]{4}\-[A-F0-9]{12}\}")]
 	private static partial Regex ClassIdRegex();
@@ -91,49 +91,5 @@ internal static partial class Helper
 		IndentCharacter = '\t'
 	};
 
-	public static JsonWriterOptions JsonWriterOptions { get; } = new JsonWriterOptions
-	{
-		Indented = true,
-		IndentSize = 1,
-		IndentCharacter = '\t'
-	};
-
-	public static void ChangeEngineAssociation(UHandlerObject uObject, string engineClassId)
-	{
-		if (uObject.UProjectFileStream is null)
-		{
-			return;
-		}
-
-
-		uObject.UProjectFileStream.Position = 0;
-
-		var uProjectStreamReader = new StreamReader(uObject.UProjectFileStream);
-		var document = JsonDocument.Parse(uProjectStreamReader.ReadToEnd());
-		var memoryStream = new MemoryStream();
-		var jsonWriter = new Utf8JsonWriter(memoryStream, JsonWriterOptions);
-
-		jsonWriter.WriteStartObject();
-
-		foreach (var property in document.RootElement.EnumerateObject())
-		{
-			if (property.Name == Constants.UProjectPropertyName)
-			{
-				jsonWriter.WriteString(Constants.UProjectPropertyName, engineClassId);
-			}
-			else
-			{
-				property.WriteTo(jsonWriter);
-			}
-		}
-
-		jsonWriter.WriteEndObject();
-		jsonWriter.Flush();
-
-		uObject.UProjectFileStream.Position = 0;
-
-		memoryStream.WriteTo(uObject.UProjectFileStream);
-
-		uObject.UProjectFileStream.Flush();
-	}
+	public static JsonWriterOptions JsonWriterOptions => Globals.JsonWriterOptions;
 }

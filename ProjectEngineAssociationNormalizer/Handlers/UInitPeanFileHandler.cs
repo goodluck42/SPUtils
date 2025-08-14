@@ -19,7 +19,7 @@ internal sealed class UInitConfigFileHandler : UHandler
 
 				uObject.PeanFileStream.Position = 0;
 
-				var jsonWriter = new Utf8JsonWriter(uObject.PeanFileStream, Helper.JsonWriterOptions);
+				var jsonWriter = new Utf8JsonWriter(uObject.PeanFileStream, Helpers.JsonWriterOptions);
 
 				jsonWriter.WriteStartArray();
 				jsonWriter.WriteEndArray();
