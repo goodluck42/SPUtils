@@ -1,4 +1,4 @@
 @echo off
-set EngineDir="C:\"
+set EngineDir=C:\
 Utils\SPUtils.exe SpUtilJsonEditor SetEngineDirectory %EngineDir%
 pause
