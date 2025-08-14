@@ -67,12 +67,6 @@ internal static partial class Helpers
 		}
 	}
 
-	public static JsonSerializerOptions JsonSerializerOptions { get; } = new JsonSerializerOptions
-	{
-		WriteIndented = true,
-		IndentSize = 1,
-		IndentCharacter = '\t'
-	};
-
+	public static JsonSerializerOptions JsonSerializerOptions => Globals.JsonSerializerOptions;
 	public static JsonWriterOptions JsonWriterOptions => Globals.JsonWriterOptions;
 }

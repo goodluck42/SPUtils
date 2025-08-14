@@ -16,7 +16,7 @@ internal static class SpUtilJsonEditor
 			[Globals.EngineDirectoryPropertyName] = directory
 		};
 
-		CommitJsonChanges(jsonNode.ToJsonString());
+		CommitJsonChanges(jsonNode.ToJsonString(Globals.JsonSerializerOptions));
 	}
 
 	private static JsonDocument GetJsonDocument()

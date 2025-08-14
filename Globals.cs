@@ -28,4 +28,11 @@ internal static class Globals
 		IndentSize = 1,
 		IndentCharacter = '\t'
 	};
+	
+	public static JsonSerializerOptions JsonSerializerOptions { get; } = new()
+	{
+		WriteIndented = true,
+		IndentSize = 1,
+		IndentCharacter = '\t'
+	};
 }
