@@ -24,24 +24,7 @@ internal static partial class Helpers
 
 	public static string GetUserId()
 	{
-		try
-		{
-			using var registryKey = Registry.LocalMachine.OpenSubKey(Constants.UserIdRegistryPath);
-
-			string? machineGuid;
-
-			if (registryKey is null ||
-			    (machineGuid = registryKey.GetValue(Constants.UserIdRegistryKey)?.ToString()) is null)
-			{
-				machineGuid = Guid.NewGuid().ToString();
-			}
-
-			return $@"{machineGuid}:{Environment.UserDomainName}\{Environment.UserName}";
-		}
-		catch
-		{
-			return $@"{Guid.Empty.ToString()}:{Environment.UserDomainName}\{Environment.UserName}";
-		}
+		return SPUtils.Helpers.GetUserId();
 	}
 
 	public static IEnumerable<(string, string)> GetUnrealEngineClassIds()
