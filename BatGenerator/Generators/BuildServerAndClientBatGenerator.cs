@@ -9,7 +9,7 @@ internal sealed class RunBuildServerAndClientBatGenerator : SimpleBatGenerator
 		var engineFolder = SPUtils.Globals.Configuration[$"{Helpers.GetUserId()}:EngineFolder"];
 
 		Console.WriteLine(SPUtils.Globals.Configuration[Helpers.GetUserId()]);
-		
+
 		if (!Helpers.TryGetProjectPath(out var projectPath))
 		{
 			FireOnException(new InvalidOperationException("Not in project directory."));
@@ -27,12 +27,37 @@ internal sealed class RunBuildServerAndClientBatGenerator : SimpleBatGenerator
 		var stringBuilder = new StringBuilder();
 
 		stringBuilder.AppendLine("@echo off");
+
+
 		stringBuilder.AppendLine(@"echo ""[------------------------------ Client ------------------------------]""");
-		stringBuilder.AppendLine(
-			$@"call ""{engineFolder}\Engine\Build\BatchFiles\Build.bat"" ShadowsPlaygroundClient Win64 Development -Project=""{projectPath}"" -WaitMutex  -FromMSBuild");
+
+		switch (SPUtils.Globals.CurrentProject)
+		{
+			case CurrentProject.Project1:
+				stringBuilder.AppendLine(
+					$@"call ""{engineFolder}\Engine\Build\BatchFiles\Build.bat"" ShadowsPlaygroundClient Win64 Development -Project=""{projectPath}"" -WaitMutex  -FromMSBuild");
+				break;
+			case CurrentProject.Project2:
+				stringBuilder.AppendLine(
+					$@"call ""{engineFolder}\Engine\Build\BatchFiles\Build.bat"" HoldItInClient Win64 Development -Project=""{projectPath}"" -WaitMutex  -FromMSBuild");
+				break;
+		}
+
 		stringBuilder.AppendLine(@"echo ""[------------------------------ Server ------------------------------]""");
-		stringBuilder.AppendLine(
-			$@"call ""{engineFolder}\Engine\Build\BatchFiles\Build.bat"" ShadowsPlaygroundServer Win64 Development -Project=""{projectPath}"" -WaitMutex  -FromMSBuild");
+
+		switch (SPUtils.Globals.CurrentProject)
+		{
+			case CurrentProject.Project1:
+				stringBuilder.AppendLine(
+					$@"call ""{engineFolder}\Engine\Build\BatchFiles\Build.bat"" ShadowsPlaygroundServer Win64 Development -Project=""{projectPath}"" -WaitMutex  -FromMSBuild");
+				break;
+			case CurrentProject.Project2:
+				stringBuilder.AppendLine(
+					$@"call ""{engineFolder}\Engine\Build\BatchFiles\Build.bat"" HoldItInServer Win64 Development -Project=""{projectPath}"" -WaitMutex  -FromMSBuild");
+				break;
+		}
+
+
 		stringBuilder.AppendLine(@"echo ""[----------------------------- Completed ----------------------------]""");
 		stringBuilder.AppendLine(@"pause");
 

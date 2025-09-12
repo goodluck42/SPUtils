@@ -9,7 +9,17 @@ internal sealed class RunServerBatGenerator : SimpleBatGenerator
 		var stringBuilder = new StringBuilder();
 
 		stringBuilder.AppendLine("@echo off");
-		stringBuilder.AppendLine(@$"start {Globals.ExePath}\ShadowsPlaygroundServer.exe -log");
+		switch (SPUtils.Globals.CurrentProject)
+		{
+			case CurrentProject.Project1:
+				stringBuilder.AppendLine(@$"start {Globals.ExePath}\ShadowsPlaygroundServer.exe -log");
+				break;
+			case CurrentProject.Project2:
+				stringBuilder.AppendLine(@$"start {Globals.ExePath}\HoldItInServer.exe -log");
+
+				break;
+		}
+
 		stringBuilder.AppendLine("exit");
 
 		GenerateBat("!XRunServer.bat", stringBuilder.ToString());
