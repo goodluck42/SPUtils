@@ -12,10 +12,10 @@ internal sealed class RunServerBatGenerator : SimpleBatGenerator
 		switch (SPUtils.Globals.CurrentProject)
 		{
 			case CurrentProject.Project1:
-				stringBuilder.AppendLine(@$"start {Globals.ExePath}\ShadowsPlaygroundServer.exe -log");
+				stringBuilder.AppendLine(@$"start {Globals.ExePath}\ShadowsPlaygroundServer.exe -NOSTEAM -log");
 				break;
 			case CurrentProject.Project2:
-				stringBuilder.AppendLine(@$"start {Globals.ExePath}\HoldItInServer.exe -log");
+				stringBuilder.AppendLine(@$"start {Globals.ExePath}\HoldItInServer.exe -NOSTEAM -log");
 
 				break;
 		}

@@ -14,11 +14,11 @@ internal sealed class RunClientBatGenerator : SimpleBatGenerator
 		{
 			case CurrentProject.Project1:
 				stringBuilder.AppendLine(
-					@$"start {Globals.ExePath}\ShadowsPlaygroundClient.exe -log -windowed -resx=800 -resy=600");
+					@$"start {Globals.ExePath}\ShadowsPlaygroundClient.exe -log -NOSTEAM -windowed -resx=800 -resy=600");
 				break;
 			case CurrentProject.Project2:
 				stringBuilder.AppendLine(
-					@$"start {Globals.ExePath}\HoldItInClient.exe -log -windowed -resx=800 -resy=600");
+					@$"start {Globals.ExePath}\HoldItInClient.exe -log -windowed -NOSTEAM -resx=800 -resy=600");
 
 				break;
 		}

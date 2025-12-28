@@ -14,12 +14,12 @@ internal sealed class RunClientNoConsoleBatGenerator : SimpleBatGenerator
 		{
 			case CurrentProject.Project1:
 				stringBuilder.AppendLine(
-					@$"start {Globals.ExePath}\ShadowsPlaygroundClient.exe -windowed -resx=800 -resy=600");
+					@$"start {Globals.ExePath}\ShadowsPlaygroundClient.exe -NOSTEAM -windowed -resx=800 -resy=600");
 
 				break;
 			case CurrentProject.Project2:
 				stringBuilder.AppendLine(
-					@$"start {Globals.ExePath}\HoldItInClient.exe -windowed -resx=800 -resy=600");
+					@$"start {Globals.ExePath}\HoldItInClient.exe -NOSTEAM -windowed -resx=800 -resy=600");
 
 				break;
 		}
